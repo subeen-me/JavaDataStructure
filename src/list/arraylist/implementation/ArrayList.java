@@ -94,12 +94,25 @@ public class ArrayList {
             return elementData[nextIndex++];
         }
 
+        // 순차적으로 이전 로드를 리턴한다
         public Object previous() {
+            // 이전 엘리먼트를 리턴하고 nextIndex의 값이 1 감소한다
             return elementData[--nextIndex];
         }
 
+        //privious 메소드를 호출해도 되는지를 체크한다
         public boolean hasPrevious() {
+            //nextIndex가 0보다 크다면 이전 엘리먼트가 존재한다는 의미
             return nextIndex > 0;
+        }
+
+        public void add(Object element) {
+            ArrayList.this.add(nextIndex++, element);
+        }
+
+        public void remove() {
+            ArrayList.this.remove(nextIndex-1);
+            nextIndex--;
         }
     }
 }
