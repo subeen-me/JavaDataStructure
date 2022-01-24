@@ -1,5 +1,7 @@
 package list.arraylist.implementation;
 
+import java.util.ListIterator;
+
 public class ArrayList {
     private int size = 0; // 몇 개의 데이터가 리스트에 들어있는가
     private Object[] elementData = new Object[100];
@@ -57,4 +59,43 @@ public class ArrayList {
     public Object get(int index) {
         return elementData[index];
     }
+
+    public int size() {
+        return size;
+    }
+
+    public int indexOf(Object o) {
+        for(int i=0; i<size; i++) {
+            if(o.equals(elementData[i])) {
+                return i;
+            }
+        }
+        return -1; //찾는 값이 없을 때 -1을 리턴
+    }
+
+    public ListIterator listIterator() {
+        return new ListIterator();
+    }
+
+    class ListIterator {
+        private int nextIndex = 0; //변수 초기화
+
+        public boolean hasNext() {
+            return nextIndex < size();
+        }
+
+        //next 메소드가 호출될 때 마다 nextIndex가 1씩 증가해야 한다
+        public Object next() {
+//          Object returnData = elementData[nextIndex];
+//          nextIndex++;
+//          return returnData;
+            // 위의 코드를 간단히 정리. nextIndex가 현재 가지고 있는 값이
+            // 일단 사용되고 그 다음에 nextIndex 값이 ++로 1이 증가하게 된다.
+            return elementData[nextIndex++];
+        }
+
+
+    }
 }
+
+
