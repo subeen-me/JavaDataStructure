@@ -94,7 +94,13 @@ public class ArrayList {
             return elementData[nextIndex++];
         }
 
+        public Object previous() {
+            return elementData[--nextIndex];
+        }
 
+        public boolean hasPrevious() {
+            return nextIndex > 0;
+        }
     }
 }
 

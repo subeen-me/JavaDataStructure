@@ -8,13 +8,12 @@ public class Main {
         numbers.addLast(30);
         numbers.addLast(40);
 
-//        for(int i=0; i<numbers.size(); i++) {
-//            System.out.println(numbers.get(i));
-//        }
-
         ArrayList.ListIterator li = numbers.listIterator();
         while (li.hasNext()) {
             System.out.println(li.next());
+        }
+        while (li.hasPrevious()) {
+            System.out.println(li.previous());
         }
     }
 }
