@@ -7,10 +7,14 @@ public class Hash {
         this.hashTable = new Slot[size];
     }
 
-    public class Slot { // 내부 클래스 슬롯
+    public class Slot {
+        String key; // 내부 클래스 슬롯
         String value;
-        Slot(String value) { // 생성자
+        Slot next; // 포인터
+        Slot(String key, String value) { // 생성자
+            this.key = key;
             this.value = value;
+            this.next = null;
         }
     }
 
@@ -21,18 +25,37 @@ public class Hash {
     public boolean saveData(String key, String value) {
         Integer address = this.hashFunc(key);
         if(this.hashTable[address] != null) {
-            this.hashTable[address].value = value;
+            Slot findSlot = this.hashTable[address];
+            Slot prevSlot = this.hashTable[address];
+            while (findSlot != null) {
+                if(findSlot.key == key) {
+                    findSlot.value = value;
+                    return true;
+                } else {
+                    prevSlot = findSlot;
+                    findSlot = findSlot.next;
+                }
+            }
+            prevSlot.next = new Slot(key, value);
         } else {
-            this.hashTable[address] = new Slot(value);
+            this.hashTable[address] = new Slot(key, value); // key 값을 같이 저장
         }
         return true;
     }
 
     public String getData(String key) {
         Integer address = this.hashFunc(key); // key 를 넣으면 address를 hashFunc로 가져오고
-        if(this.hashTable[address] != null) { // 해당 슬롯이 있다면
-            return this.hashTable[address].value; // value를 리턴
-        } else { // 해당 address에 객체가 없다면 null
+        if (this.hashTable[address] != null) {
+            Slot findSlot = this.hashTable[address];
+            while (findSlot != null) {
+                if(findSlot.key == key) {
+                    return findSlot.value;
+                } else {
+                    findSlot = findSlot.next;
+                }
+            }
+            return null;
+        } else {
             return null;
         }
     }
