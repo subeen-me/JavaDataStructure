@@ -26,6 +26,14 @@ public class LinkedList {
         }
     }
 
+    public Node node(int index) {
+        Node x = head;
+       for(int i=0; i<index; i++) {
+           x = x.next;
+       }
+        return x;
+    }
+
     private class Node {
         private Object data; // 각각의 노드가 저장할 데이터
         private Node next; // 누가 다음 노드인가를 가르킨다
